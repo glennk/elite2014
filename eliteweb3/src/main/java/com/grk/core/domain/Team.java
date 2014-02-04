@@ -1,8 +1,9 @@
 package com.grk.core.domain;
 
-import java.util.List;
-
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.annotation.Id;
+
+import com.grk.core.event.TeamDetails;
 
 public class Team {
 
@@ -11,18 +12,17 @@ public class Team {
 	private String name;
 	private String age;
 	private String level;
-//	@DBRef
-	private List<String> players;
 
-	public Team() { }
-	
+	public Team() {
+	}
+
 	public Team(String name, String age, String level) {
 		super();
 		this.name = name;
 		this.age = age;
 		this.level = level;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -34,33 +34,41 @@ public class Team {
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getAge() {
 		return age;
 	}
+
 	public void setAge(String age) {
 		this.age = age;
 	}
+
 	public String getLevel() {
 		return level;
 	}
+
 	public void setLevel(String level) {
 		this.level = level;
 	}
-	public List<String> getPlayers() {
-		return players;
+
+	public static Team fromTeamDetails(TeamDetails teamDetails) {
+		Team t = new Team();
+		BeanUtils.copyProperties(teamDetails, t);
+		return t;
 	}
 
-	public void setPlayers(List<String> players) {
-		this.players = players;
+	public TeamDetails toTeamDetails() {
+		TeamDetails details = new TeamDetails();
+		BeanUtils.copyProperties(this, details);
+		return details;
 	}
 
 	@Override
 	public String toString() {
 		return "Team [name=" + name + ", age=" + age + ", level=" + level + "]";
 	}
-	
-	
 }

@@ -1,0 +1,46 @@
+buildscript {
+    ext {
+        project.version = '1.0.0.BUILD-SNAPSHOT'
+    }
+    repositories {
+//        mavenCentral()
+        maven { url "http://repo.spring.io/libs-snapshot" }
+//        maven { url "http://repo.spring.io/libs-release" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$project.version")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'eliteweb3'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-test")
+    compile("org.springframework.data:spring-data-mongodb")
+    compile("com.fasterxml.jackson.core:jackson-databind")
+    compile("org.thymeleaf:thymeleaf-spring4")
+
+    compile("org.cloudfoundry:cloudfoundry-runtime:0.8.4")
+    compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+    compile("commons-beanutils:commons-beanutils:1.9.1")
+    testCompile("com.jayway.jsonpath:json-path-assert:0.8.1")
+    testCompile("junit:junit:4.11")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.8'
+}

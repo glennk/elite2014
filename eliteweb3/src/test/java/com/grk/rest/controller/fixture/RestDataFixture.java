@@ -3,76 +3,84 @@ package com.grk.rest.controller.fixture;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.grk.core.domain.Parent;
-import com.grk.core.domain.Player;
-//import com.grk.rest.domain.ContactInfo;
-//import com.grk.rest.domain.PlayerSummary;
+import com.grk.core.event.AllPlayersEvent;
+import com.grk.core.event.PlayerDetails;
+import com.grk.core.event.TeamDetails;
+import com.grk.rest.domain.ContactInfo;
 
 public class RestDataFixture {
-	
-	public static Player standardPlayer() {
-		Player p = new Player();
+
+	public static TeamDetails standardTeam() {
+		TeamDetails t = new TeamDetails();
+		t.setId("ABC");
+		t.setAge("15U");
+		t.setLevel("Major");
+		t.setName("Austin Elite 15U");
+
+		return t;
+	}
+
+	public static TeamDetails customTeam(String id) {
+		TeamDetails t = standardTeam();
+		t.setId(id);
+		return t;
+	}
+
+	public static List<TeamDetails> allTeams() {
+		List<TeamDetails> tl = new ArrayList<TeamDetails>();
+		TeamDetails t1 = standardTeam();
+		tl.add(t1);
+		TeamDetails t2 = customTeam("ABCDEFG");
+		tl.add(t2);
+
+		return tl;
+	}
+
+	public static String standardTeamJSON() {
+		return "{ \"id\": \"ABC-DEF-XYZ\", \"name\": \"Austin Elite 15U\", \"age\": \"15U\", \"level\": \"Major\" }";
+	}
+
+	public static PlayerDetails standardPlayer() {
+
+		TeamDetails t = standardTeam();
+
+		PlayerDetails p = new PlayerDetails();
 		p.setId("100");
-		p.setFirstName("pFirstname");
-		p.setLastName("pLastname");
-		
-		Parent p1 = new Parent();
+		p.setFirstname("pFirstname");
+		p.setLastname("pLastname");
+//		p.setJerseyNum("5");
+		p.setTeam_id(t.getId());
+
+		ContactInfo p1 = new ContactInfo();
 		p1.setName("Parent_Name");
 		p1.setPhone("512-335-3211");
 		p1.setEmail("gkron66@gmail.com");
-		List<Parent> pl = new ArrayList<Parent>();
+		List<ContactInfo> pl = new ArrayList<ContactInfo>();
 		pl.add(p1);
-		p.setParents(pl);
-		
+		p.setContacts(pl);
+
 		return p;
 	}
-	
-	public static Player standardPlayerNotFound() {
-		
-		return null;
+
+	public static PlayerDetails customPlayer(String id) {
+		PlayerDetails p = standardPlayer();
+		p.setId(id);
+		return p;
 	}
 
-	public static List<Player> standardListOfPlayers() {
-		List<Player> pl = new ArrayList<Player>();;
-		Player p1 = standardPlayer();
+	public static List<PlayerDetails> allPlayers() {
+		List<PlayerDetails> pl = new ArrayList<PlayerDetails>();
+		PlayerDetails p1 = standardPlayer();
 		pl.add(p1);
-		Player p2 = standardPlayer();
+		PlayerDetails p2 = standardPlayer();
 		p2.setId("101");
+//		p2.setJerseyNum("7");
 		pl.add(p2);
-		
+
 		return pl;
 	}
-//
-//	public static PlayerSummary standardPlayer() {
-//		PlayerSummary p = new PlayerSummary();
-//		p.setId("100");
-//		p.setFirstname("pFirstname");
-//		p.setLastname("pLastname");
-//		
-//		ContactInfo p1 = new ContactInfo();
-//		p1.setName("Parent_Name");
-//		p1.setPhone("512-335-3211");
-//		p1.setEmail("gkron66@gmail.com");
-//		List<ContactInfo> pl = new ArrayList<ContactInfo>();
-//		pl.add(p1);
-//		p.setContacts(pl);
-//		
-//		return p;
-//	}
-//	
-//	public static PlayerSummary standardPlayerNotFound() {
-//		
-//		return null;
-//	}
-//
-//	public static List<PlayerSummary> standardListOfPlayers() {
-//		List<PlayerSummary> pl = new ArrayList<PlayerSummary>();;
-//		PlayerSummary p1 = standardPlayer();
-//		pl.add(p1);
-//		PlayerSummary p2 = standardPlayer();
-//		p2.setId("101");
-//		pl.add(p2);
-//		
-//		return pl;
-//	}
+
+	public static String standardPlayerJSON() {
+		return "{ \"id\": \"109\", \"firstname\": \"rest-data-fixture\", \"lastname\": \"kronschnabl\", \"team_id\": \"ABC-DEF-XYZ\" }";
+	}
 }

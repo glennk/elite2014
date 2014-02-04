@@ -1,12 +1,17 @@
 package com.grk.core.services;
 
-import java.util.List;
-
-import com.grk.core.domain.Player;
+import com.grk.core.event.AllPlayersEvent;
+import com.grk.core.event.CreatePlayerEvent;
+import com.grk.core.event.PlayerCreatedEvent;
+import com.grk.core.event.PlayerDetailsEvent;
+import com.grk.core.event.RequestAllPlayersEvent;
+import com.grk.core.event.RequestPlayerDetailsEvent;
 
 public interface PlayerService {
 
-	public Player getPlayer(String id);
+	public PlayerDetailsEvent getPlayer(RequestPlayerDetailsEvent evt);
 	
-	public List<Player> getAllPlayers();
+	public AllPlayersEvent getAllPlayers(RequestAllPlayersEvent evt);
+	
+	public PlayerCreatedEvent createPlayer(CreatePlayerEvent evt);
 }

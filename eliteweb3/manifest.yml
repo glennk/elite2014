@@ -5,7 +5,7 @@ applications:
   instances: 1
   host: austin1
   domain: cfapps.io
-  path: target/elitewebjar-0.0.1-SNAPSHOT.jar
+  path: build/libs/eliteweb3-0.1.0.jar
   services:
     mongolab-be5bb:
       label: mongolab

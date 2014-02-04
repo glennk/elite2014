@@ -8,7 +8,7 @@ import com.grk.core.domain.Player;
 
 public interface PlayerRepository extends MongoRepository<Player, String> {
 
-    public Player findByFirstName(String firstName);
-    public List<Player> findByLastName(String lastName);
+    public List<Player> findByFirstname(String firstname);
+    public List<Player> findByLastname(String lastname);
 
 }
